@@ -1,6 +1,6 @@
 from collections import Counter
 from typing import Tuple, List
-
+import numpy as np
 from networkx import MultiGraph
 from networkx import nx
 from sympy.combinatorics import Permutation
@@ -95,7 +95,7 @@ class SurfaceCodeGraph(MultiGraph):
 
     def boundary_2(self, face):
         """
-        compute boundary of a single face
+        compute boundary of a single face node
         """
         boundary = self.code_graph.neighbors(face)
         return boundary
@@ -142,6 +142,70 @@ class SurfaceCodeGraph(MultiGraph):
         a = Counter([y for x in coboundary_list for y in x])
         coboundary_list = [x[0] for x in a.items() if x[1] % 2 == 1]
         return coboundary_list
+
+    def vertex_basis(self):
+        self.v_basis_dict = dict()
+        self.v_dict = dict()
+        for count, cycle in enumerate(self.sigma):
+            self.v_dict[cycle] = count
+            self.v_basis_dict[cycle] = np.eye[:, count]
+
+    def vertex_basis(self):
+        self.v_basis_dict = dict()
+        self.v_dict = dict()
+        A = np.eye(len(self.sigma), dtype=np.uint8)
+        for count, cycle in enumerate(self.sigma):
+            self.v_dict[cycle] = count
+            self.v_basis_dict[cycle] = A[count, :].T
+        return (self.v_basis_dict)
+
+    def edge_basis(self):
+        self.e_basis_dict = dict()
+        self.e_dict = dict()
+        B = np.eye(len(self.alpha), dtype=np.uint8)
+        for count, cycle in enumerate(self.alpha):
+            self.e_dict[cycle] = count
+            self.e_basis_dict[cycle] = B[count, :].T
+        return (self.e_basis_dict)
+
+    def face_basis(self):
+        self.f_basis_dict = dict()
+        self.f_dict = dict()
+        C = np.eye(len(self.phi), dtype=np.uint8)
+        for count, cycle in enumerate(self.phi):
+            self.f_dict[cycle] = count
+            self.f_basis_dict[cycle] = C[count, :].T
+        return (self.f_basis_dict)
+
+    def d_2(self):
+        self.D2 = np.zeros(len(self.e_dict), dtype=np.uint8)
+        for cycle in self.phi:
+            bd = self.boundary_2(cycle)
+            image = sum([self.e_basis_dict[edge] for edge in bd])
+            print(image)
+            print(type(image))
+            self.D2 = np.vstack((self.D2, image))
+        self.D2 = np.matrix(self.D2[1:, :]).H
+        return self.D2
+
+    def d_1(self):
+        self.D1 = np.zeros(len(self.v_dict), dtype=np.uint8)
+        for cycle in self.alpha:
+            bd = self.boundary_1(cycle)
+            image = sum([self.v_basis_dict[vertex] for vertex in bd])
+            print(image)
+            print(type(image))
+            self.D1 = np.vstack((self.D1, image))
+        self.D1 = np.matrix(self.D1[1:, :]).H
+        return self.D1
+
+
+
+
+
+
+
+
 
     def euler_characteristic(self):
         """

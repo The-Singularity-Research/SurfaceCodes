@@ -1,4 +1,5 @@
 import cirq
+import numpy as np
 from typing import Tuple
 from networkx import nx
 
@@ -25,8 +26,6 @@ class CirqSurfaceCodeCircuit():
         self.phi = self.scgraph.phi
 
         self.qubits = [cirq.NamedQubit(str(node)) for node in self.scgraph.code_graph.nodes]
-        print(self.qubits)
-        # self.cr = ClassicalRegister(len(self.scgraph.code_graph.nodes))
         self.circuit = cirq.Circuit()
 
         self.node_info = self.scgraph.node_dict
@@ -51,8 +50,8 @@ class CirqSurfaceCodeCircuit():
             print(self.circuit)
 
     def x_measurement(self, qubit):
-        """Measure 'qubit' in the X-basis, and store the result in 'cbit'
-        :param qubit:
+        """Measure 'qubit' in the X-basis
+        :param qubit: a name to designate a cirq.NamedQubit(str(qubit))
         :return None
         """
         self.circuit.append(cirq.H(cirq.NamedQubit(str(qubit))))
@@ -114,6 +113,8 @@ class CirqSurfaceCodeCircuit():
         coboundary_nodes = self.scgraph.delta_1(stars)
         for node in coboundary_nodes:
             self.circuit.append(cirq.X(cirq.NamedQubit(str(node))))
+
+
 
     def draw_graph(self, node_type='', layout=''):
         if layout == 'spring':
