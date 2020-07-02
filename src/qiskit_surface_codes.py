@@ -1,5 +1,5 @@
 from typing import Tuple
-
+import numpy as np
 from qiskit.circuit import QuantumCircuit, QuantumRegister, ClassicalRegister
 import networkx as nx
 from src.surface_code_graph import SurfaceCodeGraph
@@ -111,6 +111,8 @@ class QiskitSurfaceCodeCircuit(QuantumCircuit):
         """
         for edge in edges:
             self.circ.z(self.alpha_dict[edge])
+
+
 
     def draw_graph(self, node_type='', layout=''):
         if layout == 'spring':
