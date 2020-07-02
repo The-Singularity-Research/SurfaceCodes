@@ -75,13 +75,33 @@ class SurfaceCodeGraph(MultiGraph):
         for count, pair in enumerate(self.alpha, start=count + 1):
             self.alpha_dict[pair] = count
         return tuple([self.sigma_dict, self.alpha_dict, self.phi_dict])
+'''
+-----------------------------There be dragons-----------------------------
+'''
+
+    def to_list(self, node):
+        neighbor_list = []
+        my_tuple = []
+        for neighbor in self.code_graph.neighbors(node):
+            if isinstance(neighbor, tuple):
+                neighbor_list.append(neighbor)
+            elif isinstance(neighbor, int):
+                my_tuple.append(neighbor)
+        if my_tuple:
+            return [my_tuple]
+        return neighbor_list
+
 
     def boundary_1(self, edge):
         """
         compute boundary of a single edge given by a white node (cycle in alpha)
         """
-        boundary1 = [node for node in self.code_graph.neighbors(edge) if node in self.sigma_dict]
+        if len(self.code_graph.neighbors(edge)) < 2:
+            boundary1 = []
+        else:
+            boundary1 = [node for node in self.code_graph.neighbors(edge) if node in self.sigma_dict]
         return boundary1
+
 
     def del_1(self, edges: List[Tuple[int]]):
         """
@@ -97,8 +117,11 @@ class SurfaceCodeGraph(MultiGraph):
         """
         compute boundary of a single face node
         """
-        boundary = self.code_graph.neighbors(face)
-        return boundary
+        if len(list(self.code_graph.neighbors(face))) < 2:
+            boundary2 = []
+        else:
+            boundary2 = [node for node in self.code_graph.neighbors(face) if node in self.alpha_dict]
+        return boundary2
 
     def del_2(self, faces: List[Tuple[int]]):
         """
@@ -180,8 +203,11 @@ class SurfaceCodeGraph(MultiGraph):
     def d_2(self):
         self.D2 = np.zeros(len(self.e_dict), dtype=np.uint8)
         for cycle in self.phi:
-            bd = self.boundary_2(cycle)
-            image = sum([self.e_basis_dict[edge] for edge in bd])
+            bd = self.del_2(cycle)
+            if bd != 0:
+                image = sum([self.e_basis_dict[edge] for edge in bd])
+            else:
+                image = np.zeros(len(self.e_dict))
             print(image)
             print(type(image))
             self.D2 = np.vstack((self.D2, image))
@@ -191,8 +217,11 @@ class SurfaceCodeGraph(MultiGraph):
     def d_1(self):
         self.D1 = np.zeros(len(self.v_dict), dtype=np.uint8)
         for cycle in self.alpha:
-            bd = self.boundary_1(cycle)
-            image = sum([self.v_basis_dict[vertex] for vertex in bd])
+            bd = self.del_1(cycle)
+            if bd != 0:
+                image = sum([self.v_basis_dict[vertex] for vertex in bd])
+            else:
+                bd = np.zeros(len(self.e_dict))
             print(image)
             print(type(image))
             self.D1 = np.vstack((self.D1, image))
@@ -200,8 +229,9 @@ class SurfaceCodeGraph(MultiGraph):
         return self.D1
 
 
-
-
+'''
+-----------------------------No more be dragons. We are safe now-----------------------------
+'''
 
 
 
