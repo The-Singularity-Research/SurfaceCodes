@@ -189,8 +189,6 @@ class SurfaceCodeGraph(MultiGraph):
                 image = sum([self.e_basis_dict[edge] for edge in bd])
             else:
                 image = np.zeros(len(self.e_dict))
-            print(image)
-            print(type(image))
             self.D2 = np.vstack((self.D2, image))
         self.D2 = np.matrix(self.D2[1:, :]).H
         return self.D2
@@ -203,8 +201,6 @@ class SurfaceCodeGraph(MultiGraph):
                 image = sum([self.v_basis_dict[vertex] for vertex in bd])
             else:
                 bd = np.zeros(len(self.e_dict))
-            print(image)
-            print(type(image))
             self.D1 = np.vstack((self.D1, image))
         self.D1 = np.matrix(self.D1[1:, :]).H
         return self.D1
@@ -306,4 +302,3 @@ class SurfaceCodeGraph(MultiGraph):
         # plt.axis('off')
         # plt.savefig("labels_and_colors.png") # save as png
         plt.show()  # display
-
