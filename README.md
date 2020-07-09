@@ -78,7 +78,20 @@ applications to condensed matter physics and spin-glass models is:
 - [Quantum Computation with Topological Codes: from qubit to topological fault-tolerance](https://arxiv.org/pdf/1504.01444.pdf)
 
 ## Future Applications 
-Future applications will involve: 
+
+### Lattice Gauge Theories and Financial Markets
+
+In the book [Physics from Finance: A gentle introduction to gauge theories, fundamental interactions and fiber bundles](https://www.amazon.com/Physics-Finance-introduction-fundamental-interactions/dp/1795882417)
+the concept of understanding financial markets and arbitrage through the physics of lattice gauge theories is developed. From Chapter 3 of [Quantum Computation with Topological Codes: from qubit to topological fault-tolerance](https://arxiv.org/pdf/1504.01444.pdf) the following table can be found on page 82:
+
+![Lattice Gauge Theory](https://github.com/The-Singularity-Research/SurfaceCodes/blob/master/Use%20Case%20Examples/lattice_gauge_theory.png)
+
+This table explains a correspondence among random-bond Ising models (RBIM), Z/2Z chain complexes and
+stabilizer codes. Using this language we can use surface codes to model the dynamics of financial market artbitrage. 
+
+### General Applications
+
+Future applications will in general involve: 
 - modeling zeros of L-functions given by partition functions 
 of lattice (or graph) Ising type models in order to understand 
 the behavior of prime numbers and RSA public key cryptography 
