@@ -306,3 +306,4 @@ class SurfaceCodeGraph(MultiGraph):
         # plt.axis('off')
         # plt.savefig("labels_and_colors.png") # save as png
         plt.show()  # display
+
