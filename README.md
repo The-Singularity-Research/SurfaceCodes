@@ -89,7 +89,7 @@ the concept of understanding financial markets and arbitrage through the physics
 ![Lattice Gauge Theory](https://github.com/The-Singularity-Research/SurfaceCodes/blob/master/Use%20Case%20Examples/lattice_gauge_theory.png)
 
 This table explains a correspondence among random-bond Ising models (RBIM), Z/2Z chain complexes and
-stabilizer codes. Using this language we can use surface codes to model the dynamics of financial market artbitrage. 
+stabilizer codes. Using this language we can use surface codes to model the dynamics of financial market artbitrage. While this is only a Z/2Z lattice gauge theory, the full generality of unitary groups can be obtained using quantum computing. This goes beyond error correction and surface codes alone, but is a natural application of quantum computing. 
 
 #### Ising Models and Trading
 
