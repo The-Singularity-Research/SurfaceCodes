@@ -79,7 +79,9 @@ applications to condensed matter physics and spin-glass models is:
 
 ## Future Applications 
 
-### Lattice Gauge Theories and Financial Markets
+### Financial Markets
+
+#### Lattice Gauge Theories
 
 In the book [Physics from Finance: A gentle introduction to gauge theories, fundamental interactions and fiber bundles](https://www.amazon.com/Physics-Finance-introduction-fundamental-interactions/dp/1795882417)
 the concept of understanding financial markets and arbitrage through the physics of lattice gauge theories is developed. From Chapter 3 of [Quantum Computation with Topological Codes: from qubit to topological fault-tolerance](https://arxiv.org/pdf/1504.01444.pdf) the following table can be found on page 82:
@@ -88,6 +90,10 @@ the concept of understanding financial markets and arbitrage through the physics
 
 This table explains a correspondence among random-bond Ising models (RBIM), Z/2Z chain complexes and
 stabilizer codes. Using this language we can use surface codes to model the dynamics of financial market artbitrage. 
+
+#### Ising Models and Trading
+
+Heard behavior in trading and market crashes can be modeled using Ising models as explained in the article [Wall Street on a Lattice: Finance Meets Physics](https://www.weareworldquant.com/en/thought-leadership/wall-street-on-a-lattice/). Using surface codes to models such systems allowd for arbitrary connectivity among agents in a market rather than restricting to a lattice model. Although any Ising model can be mapped to a specialized lattice model, having arbitrary connectivity may allow for more intuitive explanations of trading behavior. 
 
 ### General Applications
 
