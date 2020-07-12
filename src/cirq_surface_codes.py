@@ -6,6 +6,11 @@ from networkx import nx
 # from qiskit import
 from src import SurfaceCodeGraph
 
+# visualization tools
+# %matplotlib inline
+import matplotlib.pyplot as plt
+from cirq.contrib.svg import SVGCircuit
+
 
 class CirqSurfaceCodeCircuit():
 
@@ -28,7 +33,7 @@ class CirqSurfaceCodeCircuit():
         self.qubits = [cirq.NamedQubit(str(node)) for node in self.scgraph.code_graph.nodes]
         self.circuit = cirq.Circuit()
 
-        self.node_info = self.scgraph.node_dict
+        self.node_info = self.scgraph.node_info
         self.sigma_dict, self.alpha_dict, self.phi_dict = self.node_info
 
         for cycle in self.sigma:
@@ -37,17 +42,6 @@ class CirqSurfaceCodeCircuit():
         for cycle in self.phi:
             self.circuit.append(cirq.H(cirq.NamedQubit(str(cycle))))
 
-    def draw_circuit(self, render=''):
-        # if render == 'mpl':
-        #   self.Qiskit_circ = SurfaceCodeCircuit(self.sigma, self.alpha)
-        #  return self.Qiskit_circ.circ.draw('mpl')
-
-        # if render == 'plain':
-        #   self.Qiskit_circ = SurfaceCodeCircuit(self.sigma, self.alpha)
-        #  return self.Qiskit_circ.circ.draw()
-
-        if render == '':
-            print(self.circuit)
 
     def x_measurement(self, qubit):
         """Measure 'qubit' in the X-basis
@@ -61,8 +55,8 @@ class CirqSurfaceCodeCircuit():
     def star_syndrome_measure(self, vertex: Tuple[int]):
         """
         Applies CX gates to surrounding qubits of a star then measures star qubit in X-basis
-        :param vertex:
-        :return:  self.circ, self.scgraph, self.node_info
+        :param vertex: a vertex node given by a cycle of sigma
+        :return:
         """
 
         for node in self.scgraph.code_graph.neighbors(vertex):
@@ -72,7 +66,7 @@ class CirqSurfaceCodeCircuit():
     def face_syndrome_measure(self, vertex: Tuple[int]):
         """
         Applies CZ gates to surrounding qubits on the boundary of a face then measures face qubit in X-basis
-        :param vertex:
+        :param vertex: a face node given by a cycle in phi
         :return:
         """
 
@@ -135,3 +129,11 @@ class CirqSurfaceCodeCircuit():
             self.scgraph.draw('cycles', layout)
         if node_type == 'dict':
             self.scgraph.draw('dict', layout)
+
+    def draw_circ(self, type = ''):
+        if type not in ['SVG', '']:
+            raise ValueError('node_type can be "SVG" or "plain"')
+        if type == 'SVG':
+            SVGCircuit(self.circuit)
+        elif type == 'plain':
+            print(self.circuit)
