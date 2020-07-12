@@ -76,6 +76,20 @@ class SurfaceCodeGraph(MultiGraph):
             self.alpha_dict[pair] = count
         return tuple([self.sigma_dict, self.alpha_dict, self.phi_dict])
 
+
+    def to_list(self, node):
+        neighbor_list = []
+        my_tuple = []
+        for neighbor in self.code_graph.neighbors(node):
+            if isinstance(neighbor, tuple):
+                neighbor_list.append(neighbor)
+            elif isinstance(neighbor, int):
+                my_tuple.append(neighbor)
+        if my_tuple:
+            return [my_tuple]
+        return neighbor_list
+
+
     def boundary_1(self, edge):
         """
         compute boundary of a single edge given by a white node (cycle in alpha)

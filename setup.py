@@ -19,6 +19,8 @@ setuptools.setup(
         "sympy",
         "numpy",
         "cirq",
+        "matplotlib",
+        "protobuf>=3.12.0"
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -26,4 +28,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
+    tests_require=[
+        "pytest"
+    ]
 )
