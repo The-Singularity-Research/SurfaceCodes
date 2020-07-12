@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 from collections import Counter
 from typing import Tuple, List
 import numpy as np
@@ -626,5 +625,4 @@ class SurfaceCodeGraph(MultiGraph):
 
         # plt.axis('off')
         # plt.savefig("labels_and_colors.png") # save as png
->>>>>>> Stashed changes
         plt.show()  # display

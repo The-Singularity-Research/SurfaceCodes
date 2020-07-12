@@ -1,7 +1,7 @@
 import numpy
 import numpy as np
 import numpy.linalg
-from utilities import stuff
+from src.utilities import permlist_to_tuple, rowSwap, colSwap, scaleCol, scaleRow, colCombine, rowCombine
 
 class homology():
     def __init__(self, d_1, d_2):
