@@ -9,6 +9,10 @@ For an introduction on how to use this library see the following notebook:
 
 - [Surface Code Tutorial II](https://github.com/The-Singularity-Research/QISKit-Surface-Codes/blob/master/Use%20Case%20Examples/surface_code_tutorial_2.ipynb)
 
+For an example on how to compute homology see:
+
+- [Surface Code Homology Notebook](https://github.com/The-Singularity-Research/SurfaceCodes/blob/master/Use%20Case%20Examples/surface_codes_homology.ipynb)
+
 ## Current Capabilities 
 
 ### Compatabilities
