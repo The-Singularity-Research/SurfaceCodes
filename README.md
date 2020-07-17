@@ -1,4 +1,7 @@
 # Surface Codes and Error Correction
+Check out the first YouTube video on Surface Codes:
+- [Surface Codes Video](https://www.youtube.com/watch?v=qY9FWFV-U38)
+
 For a general overview without too many technical requirements, see the 
 - [Medium article](https://medium.com/@thesingularity.research/topological-quantum-computing-334ff0e36c29)
 
