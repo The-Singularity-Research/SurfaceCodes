@@ -26,6 +26,7 @@ This Package is compatable with the following quantum computing software librari
 
 We plan for future compatabilities with: 
 
+- [Xanadu PennyLane](https://pennylane.ai/)
 - [Rigetti Forest](https://rigetti.com/)
 - [Microsoft Q#](https://www.microsoft.com/en-us/quantum/development-kit)
 
