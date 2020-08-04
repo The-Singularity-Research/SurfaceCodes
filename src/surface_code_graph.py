@@ -194,16 +194,16 @@ class SurfaceCodeGraph(MultiGraph):
         class as one of the input matrices.
         :return: matrix D2 of the differential d_2
         """
-        self.D2 = np.zeros(len(self.e_dict), dtype=np.uint8)
+        self.D2 = np.zeros(len(self.e_basis_dict), dtype=np.uint8)
         for cycle in self.phi:
             bd = self.boundary_2(cycle)
-            if bd:
+            if bd != []:
                 image = sum([self.e_basis_dict[edge] for edge in bd])
             else:
-                image = np.zeros(len(self.e_dict))
+                image = np.zeros(len(self.e_basis_dict))
             self.D2 = np.vstack((self.D2, image))
-        self.D2 = np.matrix(self.D2[1:, :]).H
-
+        self.D2 = np.array(self.D2[1:, :]).T
+    
     def d_1(self):
         """
         Create the matrix D1 for the differential d_1 in the chain complex
@@ -211,15 +211,15 @@ class SurfaceCodeGraph(MultiGraph):
         class as one of the input matrices
         :return: matrix D1 of the differential d_1
         """
-        self.D1 = np.zeros(len(self.v_dict), dtype=np.uint8)
+        self.D1 = np.zeros(len(self.v_basis_dict), dtype=np.uint8)
         for cycle in self.alpha:
             bd = self.boundary_1(cycle)
-            if bd:
+            if bd != []:
                 image = sum([self.v_basis_dict[vertex] for vertex in bd])
-            # else:
-            #     image = np.zeros(len(self.e_dict))
-            self.D1 = np.vstack((self.D1, image))  # D1 is which is the np.zeroes(len(elements in sigma)) # currently 3
-        self.D1 = np.matrix(self.D1[1:, :]).H
+            else:
+                image = np.zeros(len(self.v_basis_dict))
+            self.D1 = np.vstack((self.D1, image))
+        self.D1 = np.array(self.D1[1:, :]).T
 
     def euler_characteristic(self):
         """
